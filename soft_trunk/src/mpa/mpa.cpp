@@ -54,7 +54,7 @@ bool MPA::disconnect() {
 
 void MPA::ensure_connection() const {
 	if (!connected_) {
-		throw std::runtime_error("Ooperation requires a connection.");
+		throw std::runtime_error("Operation requires a connection.");
 	}
 }
 
