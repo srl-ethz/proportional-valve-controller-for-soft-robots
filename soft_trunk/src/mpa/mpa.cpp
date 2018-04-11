@@ -1,6 +1,4 @@
 #include "mpa/mpa.h"
-#include <ostream>
-#include <iostream>
 
 namespace {
 	const int address_input_start = 45392;
