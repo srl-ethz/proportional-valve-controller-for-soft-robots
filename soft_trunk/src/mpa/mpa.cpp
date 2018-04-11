@@ -15,8 +15,8 @@ MPA::MPA(const char* node, const char* service) {
 	connected_ = false;
 
 	// Resize buffer space.
-	// Input buffer also contains diagonostics entries.
-	input_buffer_.resize(2 * num_valves);
+	// Input buffer for each valve is of the format (actual, setpoint, diagnostic).
+	input_buffer_.resize(3 * num_valves);
 	output_buffer_.resize(num_valves);
 
 	// Create Modbus context.
@@ -61,7 +61,7 @@ void MPA::ensure_connection() const {
 int MPA::get_single_pressure(const int index) {
 	ensure_connection();
 	const auto dest = &input_buffer_[index];
-	const auto addr = address_input_start + cpx_input_offset + 2 * index;
+	const auto addr = address_input_start + cpx_input_offset + 3 * index;
 
 	if (modbus_read_registers(ctx_, addr, 1, dest) == -1) {
 		throw std::runtime_error("Failed to read VPPM register.");
@@ -84,16 +84,17 @@ void MPA::get_all_pressures(std::vector<int>* output) {
 	const auto dest = &input_buffer_[0];
 	const auto addr = address_input_start + cpx_input_offset;
 
-	if (modbus_read_registers(ctx_, addr, num_valves * 2, dest) == -1) {
+	if (modbus_read_registers(ctx_, addr, num_valves * 3, dest) == -1) {
 		throw std::runtime_error("Failed to read VPPM registers.");
 	}
 
+	// Only read the actual value and ignore setpoint/diagonstic.
 	for (auto i = 0; i < num_valves; i++) {
-		output->at(i) = input_buffer_[i * 2];
+		output->at(i) = input_buffer_[i * 3];
 	}
 }
 
-void MPA::set_all_pressures(std::vector<int>& pressures) {
+void MPA::set_all_pressures(const std::vector<int>& pressures) {
 	ensure_connection();
 	const auto data = &output_buffer_[0];
 	const auto addr = address_output_start + cpx_output_offset;

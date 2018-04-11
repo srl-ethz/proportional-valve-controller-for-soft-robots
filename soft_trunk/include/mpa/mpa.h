@@ -22,7 +22,7 @@ public:
 	void set_single_pressure(int index, int pressure);
 
 	void get_all_pressures(std::vector<int>* output);
-	void set_all_pressures(std::vector<int>& pressures);
+	void set_all_pressures(const std::vector<int>& pressures);
 
 private:
 	void ensure_connection() const;
