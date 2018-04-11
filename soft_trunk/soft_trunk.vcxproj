@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mpa\mpa.cpp" />
     <ClCompile Include="src\soft_trunk.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +27,7 @@
     <ClInclude Include="include\modbus\modbus-tcp.h" />
     <ClInclude Include="include\modbus\modbus-version.h" />
     <ClInclude Include="include\modbus\modbus.h" />
+    <ClInclude Include="include\mpa\mpa.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

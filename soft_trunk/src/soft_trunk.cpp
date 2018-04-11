@@ -1,20 +1,44 @@
 #include <iostream>
 
-#include "modbus/modbus.h"
+#include "mpa/mpa.h"
 
 
 int main() {
-	const auto ctx = modbus_new_tcp_pi("127.0.0.1", "502");
+	// Create MPA controller.
+	MPA mpa("127.0.0.1", "502");
 
-	if (modbus_connect(ctx) == -1) {
-		std::cout << "Failed to connect." << std::endl;
-		modbus_free(ctx);
+	// Connect.
+	if (!mpa.connect()) {
+		std::cout << "Failed to connect to MPA." << std::endl;
 		return -1;
 	}
 
-	if (modbus_write_register(ctx, 0, 42) == -1) {
-		std::cout << "Failed to write register." << std::endl;
-	}
+	// Set valve 0 to 1 bar.
+	mpa.set_single_pressure(0, 1000);
+
+	// Wait 100 ms.
+	Sleep(100);
+
+	// Read pressure of valve 0.
+	std::cout << "Valve 0: "
+		<< mpa.get_single_pressure(0)
+		<< " mbar"
+		<< std::endl;
+
+	// Set valve 0 to 0 bar (off).
+	mpa.set_single_pressure(0, 0);
+
+	// Wait 100 ms.
+	Sleep(100);
+
+	// Read pressure of valve 0.
+	std::cout << "Valve 0: "
+		<< mpa.get_single_pressure(0)
+		<< " mbar"
+		<< std::endl;
+
+	// Disconnect.
+	mpa.disconnect();
 
 	return 0;
 }
