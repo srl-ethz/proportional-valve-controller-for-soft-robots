@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "mpa/mpa.h"
+#include "../include/mpa/mpa.h"
 
 
 int main() {
