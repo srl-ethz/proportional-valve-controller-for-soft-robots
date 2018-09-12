@@ -14,7 +14,7 @@
 `$ ./soft_trunk`
 
 
-Old way of installing the modbus library (not using apt-get):
+(Old way of installing the modbus library (not using apt-get):
 * Install [libmodbus](https://github.com/stephane/libmodbus), following the instructions on its README; `$ ./autogen.sh; ./configure; sudo make install`
-* `$ sudo ldconfig` to create necessary links to the shared libraries
+* `$ sudo ldconfig` to create necessary links to the shared libraries)
 
