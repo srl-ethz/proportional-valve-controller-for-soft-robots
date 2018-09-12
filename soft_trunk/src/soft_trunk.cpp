@@ -1,6 +1,7 @@
 #include <iostream>
-
-#include "mpa/mpa.h"
+#include <chrono>
+#include <thread>
+#include "../include/mpa/mpa.h"
 
 
 int main() {
@@ -17,7 +18,7 @@ int main() {
 	mpa.set_single_pressure(0, 1000);
 
 	// Wait 100 ms.
-	Sleep(100);
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	// Read pressure of valve 0.
 	std::cout << "Valve 0: "
@@ -29,7 +30,7 @@ int main() {
 	mpa.set_single_pressure(0, 0);
 
 	// Wait 100 ms.
-	Sleep(100);
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	// Read pressure of valve 0.
 	std::cout << "Valve 0: "

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-#include "modbus/modbus.h"
+#include "../modbus/modbus.h"
 
 
 class MPA {
