@@ -1,4 +1,6 @@
-# soft-trunk
+# Proportional Valve Controller for Soft Robots
+Controller library for a Festo proportional valve array to control via modbus the actuation chambers of a soft robot such as a soft robotic arm.
+
 ## Using on Ubuntu
 
 * install libmodbus library on ubuntu:
